@@ -1687,11 +1687,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7114970267329870200, guid: ab63f30b9349ee34eb7f2285f87b1193,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 3f03ce14870b84145aaa9ca0c4bec92b, type: 2}
     - target: {fileID: 7114970267329870202, guid: ab63f30b9349ee34eb7f2285f87b1193,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1747,30 +1742,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7114970267329870202, guid: ab63f30b9349ee34eb7f2285f87b1193,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 6.0368543
-      objectReference: {fileID: 0}
-    - target: {fileID: 7114970267329870202, guid: ab63f30b9349ee34eb7f2285f87b1193,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 4.7257195
-      objectReference: {fileID: 0}
-    - target: {fileID: 7114970267329870202, guid: ab63f30b9349ee34eb7f2285f87b1193,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.454
-      objectReference: {fileID: 0}
     - target: {fileID: 7114970267329870206, guid: ab63f30b9349ee34eb7f2285f87b1193,
         type: 3}
       propertyPath: m_Name
       value: lauch Pad
-      objectReference: {fileID: 0}
-    - target: {fileID: 7114970267329870206, guid: ab63f30b9349ee34eb7f2285f87b1193,
-        type: 3}
-      propertyPath: m_TagString
-      value: Friendly
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab63f30b9349ee34eb7f2285f87b1193, type: 3}
