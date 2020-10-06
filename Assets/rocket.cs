@@ -9,6 +9,7 @@ public class rocket : MonoBehaviour
     AudioSource thrusting;
     [SerializeField] float rcsRotation = 200f;
     [SerializeField] float mainThrust = 1500f;
+    [SerializeField] AudioClip mainEngine;
 
     enum State { Alive,Dying,Transcending};
     State state = State.Alive;
@@ -27,6 +28,7 @@ public class rocket : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        //ignore collision if not alive
         if(state != State.Alive)
         {
             return;
