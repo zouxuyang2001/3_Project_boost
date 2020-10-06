@@ -236,7 +236,7 @@ PrefabInstance:
     - target: {fileID: 1711552870506343368, guid: 826d3dbf0f13dbe46b4a19fd9e3cbe5f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.06
+      value: 21.64
       objectReference: {fileID: 0}
     - target: {fileID: 1711552870506343368, guid: 826d3dbf0f13dbe46b4a19fd9e3cbe5f,
         type: 3}
@@ -599,7 +599,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: AtomRocket
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: b1b081daaab562642af04d9995d2dcc7, type: 3}
 --- !u!1001 &5598384713640388650
 PrefabInstance:

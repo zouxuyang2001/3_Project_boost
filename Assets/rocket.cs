@@ -6,18 +6,17 @@ using UnityEngine.SceneManagement;
 public class rocket : MonoBehaviour
 {
     Rigidbody rigidbody;
-    AudioSource thrusting;
+    AudioSource audiosource;
     [SerializeField] float rcsRotation = 200f;
     [SerializeField] float mainThrust = 1500f;
-    [SerializeField] AudioClip mainEngine;
-
+    [SerializeField] AudioClip mainEngine,level,death;
     enum State { Alive,Dying,Transcending};
     State state = State.Alive;
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        thrusting = GetComponent<AudioSource>();
+        audiosource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -40,14 +39,28 @@ public class rocket : MonoBehaviour
                 print("OK");
                 break;
             case "Finish":
-                state = State.Transcending;
-                Invoke("LoadNextScene", 2f);//parameterise time
+                StartFinishSequence();
                 break;
             default:
-                state = State.Dying;
-                Invoke("LoadFirstLevel", 1f);
+                StartDeathSequence();
                 break;
         }
+    }
+
+    private void StartDeathSequence()
+    {
+        state = State.Dying;
+        audiosource.Stop();
+        audiosource.PlayOneShot(death);
+        Invoke("LoadFirstLevel", 4f);
+    }
+
+    private void StartFinishSequence()
+    {
+        state = State.Transcending;
+        audiosource.Stop();
+        audiosource.PlayOneShot(level);
+        Invoke("LoadNextScene", 2f);//parameterise time
     }
 
     private void LoadFirstLevel()
@@ -60,17 +73,16 @@ public class rocket : MonoBehaviour
         SceneManager.LoadScene(1); // allow to do more than 2 levels
     }
 
-    void ProcessInput()
-    {
+    void ProcessInput()    {
         //todo some where to stop the sound on death
         if (state == State.Alive)
         {
-            Thrusting();
-            Rotate();
+            RespondToThrustInput();
+            RespondToRotateInput();
         }
     }
 
-    void Rotate()
+    void RespondToRotateInput()
     {
         float rotateThisFrame = rcsRotation * Time.deltaTime;
         if (Input.GetKey(KeyCode.A))
@@ -85,22 +97,26 @@ public class rocket : MonoBehaviour
         }
     }
 
-    void Thrusting()
+    void RespondToThrustInput()
     {
         float thrustThisFrame = mainThrust * Time.deltaTime;
         if (Input.GetKey(KeyCode.Space))
         { //can thrust while rotating
-            
-            rigidbody.AddRelativeForce(Vector3.up*thrustThisFrame);
-
-            if (!thrusting.isPlaying)
-            {
-                thrusting.Play();
-            }
+            ApplyThrust(thrustThisFrame);
         }
         else
         {
-            thrusting.Stop();
+            audiosource.Stop();
+        }
+    }
+
+    private void ApplyThrust(float thrustThisFrame)
+    {
+        rigidbody.AddRelativeForce(Vector3.up * thrustThisFrame);
+
+        if (!audiosource.isPlaying)
+        {
+            audiosource.PlayOneShot(mainEngine);
         }
     }
 }

@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 929023426594609918}
   - component: {fileID: 5283004870386973232}
   - component: {fileID: 5283004870386973246}
-  - component: {fileID: 5283004870386973247}
+  - component: {fileID: 5208602814802221985}
   m_Layer: 0
   m_Name: AtomRocket
   m_TagString: Untagged
@@ -562,7 +562,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5283004870386973247
+--- !u!114 &5208602814802221985
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -576,6 +576,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rcsRotation: 200
   mainThrust: 1500
+  mainEngine: {fileID: 8300000, guid: 60c6d9c3c3e25344a9dc63f49c04d238, type: 3}
+  level: {fileID: 8300000, guid: a99f060deae6f1746949377b1c81bf44, type: 3}
+  death: {fileID: 8300000, guid: 216d7e7bde503374aabaa5e48f046806, type: 3}
 --- !u!1 &5878358488266154747
 GameObject:
   m_ObjectHideFlags: 0
