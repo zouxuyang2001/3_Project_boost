@@ -101,10 +101,10 @@ public class rocket : MonoBehaviour
 
     void RespondToThrustInput()
     {
-        float thrustThisFrame = mainThrust * Time.deltaTime;
+        
         if (Input.GetKey(KeyCode.Space))
         { //can thrust while rotating
-            ApplyThrust(thrustThisFrame);
+            ApplyThrust();
             
         }
         else
@@ -114,9 +114,9 @@ public class rocket : MonoBehaviour
         }
     }
 
-    private void ApplyThrust(float thrustThisFrame)
+    private void ApplyThrust()
     {
-        rigidbody.AddRelativeForce(Vector3.up * thrustThisFrame);
+        rigidbody.AddRelativeForce(Vector3.up * Time.deltaTime*1500f);
 
         if (!audiosource.isPlaying)
         {
