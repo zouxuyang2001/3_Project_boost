@@ -10,6 +10,7 @@ public class rocket : MonoBehaviour
     [SerializeField] float rcsRotation = 200f;
     [SerializeField] float mainThrust = 1500f;
     [SerializeField] AudioClip mainEngine,level,death;
+    [SerializeField] ParticleSystem mainEngineParticles, levelParticles, deathParticles;
     enum State { Alive,Dying,Transcending};
     State state = State.Alive;
     // Start is called before the first frame update
@@ -35,8 +36,7 @@ public class rocket : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Friendly":
-                //do something
-                print("OK");
+                //do nothing
                 break;
             case "Finish":
                 StartFinishSequence();
@@ -52,6 +52,7 @@ public class rocket : MonoBehaviour
         state = State.Dying;
         audiosource.Stop();
         audiosource.PlayOneShot(death);
+        deathParticles.Play();
         Invoke("LoadFirstLevel", 4f);
     }
 
@@ -60,6 +61,7 @@ public class rocket : MonoBehaviour
         state = State.Transcending;
         audiosource.Stop();
         audiosource.PlayOneShot(level);
+        levelParticles.Play();
         Invoke("LoadNextScene", 2f);//parameterise time
     }
 
@@ -103,10 +105,12 @@ public class rocket : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         { //can thrust while rotating
             ApplyThrust(thrustThisFrame);
+            
         }
         else
         {
             audiosource.Stop();
+            mainEngineParticles.Stop();
         }
     }
 
@@ -118,5 +122,7 @@ public class rocket : MonoBehaviour
         {
             audiosource.PlayOneShot(mainEngine);
         }
+
+        mainEngineParticles.Play();
     }
 }
