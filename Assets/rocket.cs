@@ -8,7 +8,9 @@ public class rocket : MonoBehaviour
     Rigidbody rigidbody;
     AudioSource audiosource;
     [SerializeField] float rcsRotation = 200f;
-    [SerializeField] float mainThrust = 1500f;
+    [SerializeField] float mainThrust = 1000f;
+    [SerializeField] float levelLoadDelay = 2f;
+
     [SerializeField] AudioClip mainEngine,level,death;
     [SerializeField] ParticleSystem mainEngineParticles, levelParticles, deathParticles;
     enum State { Alive,Dying,Transcending};
@@ -53,7 +55,7 @@ public class rocket : MonoBehaviour
         audiosource.Stop();
         audiosource.PlayOneShot(death);
         deathParticles.Play();
-        Invoke("LoadFirstLevel", 4f);
+        Invoke("LoadFirstLevel", levelLoadDelay);
     }
 
     private void StartFinishSequence()
@@ -62,7 +64,7 @@ public class rocket : MonoBehaviour
         audiosource.Stop();
         audiosource.PlayOneShot(level);
         levelParticles.Play();
-        Invoke("LoadNextScene", 2f);//parameterise time
+        Invoke("LoadNextScene",levelLoadDelay);//parameterise time
     }
 
     private void LoadFirstLevel()
@@ -116,7 +118,7 @@ public class rocket : MonoBehaviour
 
     private void ApplyThrust()
     {
-        rigidbody.AddRelativeForce(Vector3.up * Time.deltaTime*1500f);
+        rigidbody.AddRelativeForce(Vector3.up * Time.deltaTime*mainThrust);
 
         if (!audiosource.isPlaying)
         {
@@ -125,4 +127,16 @@ public class rocket : MonoBehaviour
 
         mainEngineParticles.Play();
     }
-}
+
+    void CheatKey()
+    {
+        if (Input.GetKey(KeyCode.L))
+        {
+            SceneManager.LoadScene(2);
+        }
+        if (Input.GetKey(KeyCode.C))
+        {
+
+        }
+    }
+}  
