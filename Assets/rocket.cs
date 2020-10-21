@@ -15,6 +15,7 @@ public class rocket : MonoBehaviour
     [SerializeField] ParticleSystem mainEngineParticles, levelParticles, deathParticles;
     enum State { Alive,Dying,Transcending};
     State state = State.Alive;
+   public bool collisionAreEnable = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +32,7 @@ public class rocket : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         //ignore collision if not alive
-        if(state != State.Alive)
+        if(state != State.Alive||!collisionAreEnable)
         {
             return;
         }
@@ -77,12 +78,25 @@ public class rocket : MonoBehaviour
         SceneManager.LoadScene(1); // allow to do more than 2 levels
     }
 
-    void ProcessInput()    {
+    void ProcessInput()
+    {
         //todo some where to stop the sound on death
         if (state == State.Alive)
         {
             RespondToThrustInput();
             RespondToRotateInput();
+        }
+        RespondToDebugKey();
+    }
+
+    void RespondToDebugKey()
+    {
+       if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadNextScene();
+        }
+       else if(Input.GetKeyDown(KeyCode.C)){
+            collisionAreEnable = !collisionAreEnable;
         }
     }
 
@@ -128,15 +142,5 @@ public class rocket : MonoBehaviour
         mainEngineParticles.Play();
     }
 
-    void CheatKey()
-    {
-        if (Input.GetKey(KeyCode.L))
-        {
-            SceneManager.LoadScene(2);
-        }
-        if (Input.GetKey(KeyCode.C))
-        {
-
-        }
-    }
+    
 }  
